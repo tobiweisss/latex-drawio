@@ -25,3 +25,4 @@ RUN apt-get install texlive-lang-english texlive-lang-german -y
 
 COPY latex-build.sh /usr/bin/latex-build
 RUN chmod +x /usr/bin/latex-build
+RUN echo "shopt -s globstar" >> /root/.bashrc

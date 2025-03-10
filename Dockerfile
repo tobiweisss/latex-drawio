@@ -5,10 +5,10 @@ ENV TARGET_ARCH="amd64"
 # Stage 1: Install Drawio Desktop
 # This is inspired by https://github.com/rlespinasse/docker-drawio-desktop-headless/blob/v1.x/Dockerfile
 RUN apt-get update -y && apt-get upgrade -y
-RUN apt-get install -y xvfb wget libgbm1 libasound2
+RUN apt-get install -y xvfb wget libgbm1 libasound2t64
 RUN wget -q https://github.com/jgraph/drawio-desktop/releases/download/v${DRAWIO_VERSION}/drawio-${TARGET_ARCH}-${DRAWIO_VERSION}.deb && \
-    apt-get install -y /opt/drawio-desktop/drawio-${TARGET_ARCH}-${DRAWIO_VERSION}.deb && \
-    rm -rf /opt/drawio-desktop/drawio-${TARGET_ARCH}-${DRAWIO_VERSION}.deb
+    apt-get install -y ./drawio-${TARGET_ARCH}-${DRAWIO_VERSION}.deb && \
+    rm -rf ./drawio-${TARGET_ARCH}-${DRAWIO_VERSION}.deb
 
 RUN apt-get install -y  fonts-liberation \
                         fonts-arphic-ukai fonts-arphic-uming \

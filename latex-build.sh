@@ -97,4 +97,6 @@ latexmk -pdf
 if [ "$clean" = true ]; then
   # Remove the auxiliary files if exist
   rm -f **/*.aux **/*.log **/*.out **/*.toc **/*.run.xml **/*.fls **/*.blg **/*.bbl **/*.fdb_latexmk **/*.synctex.gz **/*.bcf **/*.nav **/*.snm **/*.lol **/*.lof **/*.lot
+  # For some reason the glob pattern does not match the files in the root directory
+  rm -f *.aux *.log *.out *.toc *.run.xml *.fls *.blg *.bbl *.fdb_latexmk *.synctex.gz *.bcf *.nav *.snm *.lol *.lof *.lot
 fi

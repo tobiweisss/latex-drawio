@@ -8,10 +8,10 @@ To pull the latest version of this image use `docker pull ghcr.io/tobiweisss/lat
 
 To simplify the usage the usage the container introduces the `latex-build` command to automatically build `<your-file>.drawio.pdf` from ever `<your-file>.drawio` in the specified directory. After that the script calls `latexmk -pdf` for building all the `*.tex` files.
 
-Following Options are available:
-    -h, --help:     Show the help message
-    -d, --dir:      Specify the input directory to search for *.tex and *.drawio files. Default is the current directory
-    -c, --clean:    Clean up all auxiliary files 
+Following Options are available: </br>
+    -h, --help:     Show the help message </br>
+    -d, --dir:      Specify the input directory to search for `*.tex` and `*.drawio` files. Default is the current directory</br>
+    -c, --clean:    Clean up all auxiliary files </br>
 
 ## Thanks to 
-[rlespinasse](https://github.com/rlespinasse/docker-drawio-desktop-headless) dockerized version of drawio which is used as baseimage
+[rlespinasse](https://github.com/rlespinasse/docker-drawio-desktop-headless) dockerized version of drawio

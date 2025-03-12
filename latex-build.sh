@@ -83,6 +83,8 @@ fi
 
 cd $dir
 
+# Exit on error, unset variables and pipe fails
+set -eou pipefail
 
 # Search for the drawio files in the current directory and all its subdirectories
 drawio_files=$(find ~+ -type f -name "*.drawio")

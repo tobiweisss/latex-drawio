@@ -95,7 +95,7 @@ do
 done
 
 # Build the latex files using latexmk and pdflatex
-latexmk -pdf
+latexmk -pdf -halt-on-error -interaction=nonstopmode -file-line-error
 
 if [ "$clean" = true ]; then
   # Remove the auxiliary files if exist

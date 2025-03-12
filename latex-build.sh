@@ -88,10 +88,19 @@ set -eou pipefail
 
 # Search for the drawio files in the current directory and all its subdirectories
 drawio_files=$(find ~+ -type f -name "*.drawio")
-# Convert the drawio files to pdf files 
+
+# Convert the drawio files to pdf files if they are newer or the pdf doesn't exist
 for drawio_file in $drawio_files
 do
-  xvfb-run -a drawio -x -f pdf -o $drawio_file.pdf --crop -t $drawio_file --no-sandbox --disable-gpu 2>&1 | grep -Fvf "/usr/share/latex-build/unwanted-logs.txt"
+  pdf_file="${drawio_file}.pdf"
+
+  # Check if drawio file is newer than the pdf file or if the pdf does not exist
+  if [[ ! -f "$pdf_file" || "$drawio_file" -nt "$pdf_file" ]]; then
+    echo "Converting: $drawio_file -> $pdf_file"
+    xvfb-run -a drawio -x -f pdf -o "$pdf_file" --crop -t "$drawio_file" --no-sandbox --disable-gpu 2>&1 | grep -Fvf "/usr/share/latex-build/unwanted-logs.txt"
+  else
+    echo "Skipping: $drawio_file (PDF is up-to-date)"
+  fi
 done
 
 #Build the latex files using latexmk and pdflatex

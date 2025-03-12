@@ -94,12 +94,12 @@ do
   xvfb-run -a drawio -x -f pdf -o $drawio_file.pdf --crop -t $drawio_file --no-sandbox --disable-gpu 2>&1 | grep -Fvf "/usr/share/latex-build/unwanted-logs.txt"
 done
 
-# Build the latex files using latexmk and pdflatex
-latexmk -pdf -halt-on-error -interaction=nonstopmode -file-line-error
+#Build the latex files using latexmk and pdflatex
+latexmk -pdf -bibtex- -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
 
 if [ "$clean" = true ]; then
   # Remove the auxiliary files if exist
-  rm -f **/*.aux **/*.log **/*.out **/*.toc **/*.run.xml **/*.fls **/*.blg **/*.bbl **/*.fdb_latexmk **/*.synctex.gz **/*.bcf **/*.nav **/*.snm **/*.lol **/*.lof **/*.lot
+  rm -f **/*.aux **/*.log **/*.out **/*.toc **/*.run.xml **/*.fls **/*.blg **/*.bbl **/*.fdb_latexmk **/*.bcf **/*.nav **/*.snm **/*.lol **/*.lof **/*.lot
   # For some reason the glob pattern does not match the files in the root directory
-  rm -f *.aux *.log *.out *.toc *.run.xml *.fls *.blg *.bbl *.fdb_latexmk *.synctex.gz *.bcf *.nav *.snm *.lol *.lof *.lot
+  rm -f *.aux *.log *.out *.toc *.run.xml *.fls *.blg *.bbl *.fdb_latexmk *.bcf *.nav *.snm *.lol *.lof *.lot
 fi

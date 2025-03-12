@@ -7,3 +7,4 @@ VizNullHypothesis is disabled
 extension not supported
 Checking for beta autoupdate feature for deb/rpm distributions
 Found package-type: deb
+XDG_RUNTIME_DIR is invalid or not set in the environment

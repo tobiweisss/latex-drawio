@@ -83,16 +83,13 @@ fi
 
 cd $dir
 
-# Start the xvfb server
-export DISPLAY="${XVFB_DISPLAY:?}"
-Xvfb "${XVFB_DISPLAY:?}" ${XVFB_OPTIONS} &
 
 # Search for the drawio files in the current directory and all its subdirectories
-drawio_files=$(find . -type f -name "*.drawio")
+drawio_files=$(find ~+ -type f -name "*.drawio")
 # Convert the drawio files to pdf files 
 for drawio_file in $drawio_files
 do
-  drawio --no-sandbox --disable-gpu -x -f pdf -o $drawio_file.pdf --crop -t $drawio_file 2>&1 | grep -Fvf "/usr/share/latex-build/unwanted-logs.txt"
+  xvfb-run -a drawio -x -f pdf -o $drawio_file.pdf --crop -t $drawio_file --no-sandbox --disable-gpu 2>&1 | grep -Fvf "/usr/share/latex-build/unwanted-logs.txt"
 done
 
 # Build the latex files using latexmk and pdflatex

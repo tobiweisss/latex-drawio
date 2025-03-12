@@ -2,9 +2,6 @@ FROM ubuntu:24.04
 ENV DRAWIO_VERSION="26.0.16"
 ENV TARGET_ARCH="amd64"
 
-ENV XVFB_DISPLAY=":42"
-ENV XVFB_OPTIONS="-nolisten unix"
-
 # Stage 1: Install Drawio Desktop
 # This is inspired by https://github.com/rlespinasse/docker-drawio-desktop-headless/blob/v1.x/Dockerfile
 RUN apt-get update -y && apt-get upgrade -y

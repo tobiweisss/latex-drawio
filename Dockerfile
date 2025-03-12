@@ -1,11 +1,7 @@
 FROM ubuntu:24.04
 ENV DRAWIO_VERSION="26.0.16"
 ENV TARGET_ARCH="amd64"
-ENV ELECTRON_DISABLE_SECURITY_WARNINGS "true"
-ENV DRAWIO_DISABLE_UPDATE "true"
-ENV XVFB_DISPLAY ":42"
-ENV XVFB_OPTIONS "-nolisten unix"
-ENV ELECTRON_ENABLE_LOGGING "false"
+
 
 # Stage 1: Install Drawio Desktop
 # This is inspired by https://github.com/rlespinasse/docker-drawio-desktop-headless/blob/v1.x/Dockerfile
@@ -28,6 +24,10 @@ RUN apt-get install gawk -y && apt-get install coreutils -y && apt-get install g
 RUN apt-get install `apt-get --assume-no install texlive-full | awk '/The following additional packages will be installed/{f=1;next} /Suggested packages/{f=0} f' | tr ' ' '\n' | grep -vP 'doc$' | grep -vP 'texlive-lang' | grep -vP 'latex-cjk' | tr '\n' ' '`-y
 RUN apt-get install texlive-lang-english texlive-lang-german -y
 
+##################################################################################################
+# Stage 3: Make latex-build script available
 COPY latex-build.sh /usr/bin/latex-build
 RUN chmod +x /usr/bin/latex-build
+RUN mkdir /usr/share/latex-build/
+COPY unwanted-logs.txt /usr/share/latex-build/unwanted-logs.txt
 RUN echo "shopt -s globstar" >> /root/.bashrc

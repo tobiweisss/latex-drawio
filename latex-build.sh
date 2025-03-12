@@ -88,7 +88,7 @@ drawio_files=$(find . -type f -name "*.drawio")
 # Convert the drawio files to pdf files 
 for drawio_file in $drawio_files
 do
-  xvfb-run drawio --no-sandbox -x -f pdf -o $drawio_file.pdf --crop -t $drawio_file
+  xvfb-run drawio --no-sandbox --disable-gpu -x -f pdf -o $drawio_file.pdf --crop -t $drawio_file 2>&1 | grep -Fvf "/usr/share/latex-build/unwanted-logs.txt"
 done
 
 # Build the latex files using latexmk and pdflatex

@@ -14,10 +14,10 @@ Following Options are available: </br>
     -c, --clean:    Clean up all auxiliary files </br>
 
 ## Intended use with LaTeX-Workshop in a VS Code devcontainer
-If you want to use this image in combination with the [Visual Studio Code LaTeX Workshop extension](https://github.com/James-Yu/LaTeX-Workshop) you can use the devcontainer provided in [examples/.devcontainer/](examples/.devcontainer/). This devcontainer is configured to build your LaTeX project using the provided scipt, when you click on `build` or press `Ctrl + Alt + B`. In the LaTex Workshop extension you can find two new recipes called `latex-build 🐱☕` to build the project using `latex-build` and a `latex-build-clean 🐱☕` recipe to build the project and clean up afterwards using `latex-build -c`.
+If you want to use this image in combination with the [Visual Studio Code LaTeX Workshop extension](https://github.com/James-Yu/LaTeX-Workshop) you can use the devcontainer provided in [examples/.devcontainer/](examples/.devcontainer/). This devcontainer is configured to build your LaTeX project using the provided scipt, when you click on `build` or press `Ctrl + Alt + B`. In the LaTex Workshop extension you can find two new recipes called `latex-build 🐱☕` to build the project using `latex-build` and a `latex-build-clean 🐱☕` recipe to build the project and clean up afterwards using `latex-build -c`.<br>
 This setup allows you to build and edit your LaTeX projects on every machine running Docker and VS Code.
 
 ## Thanks to 
-[rlespinasse](https://github.com/rlespinasse/docker-drawio-desktop-headless) dockerized version of drawio
-[James-Yu][https://github.com/James-Yu] for the VS Code LaTeX Workshop Extension
-[tobiil](https://github.com/tobiil) for contribution
+* [rlespinasse](https://github.com/rlespinasse/docker-drawio-desktop-headless) dockerized version of drawio
+* [James-Yu](https://github.com/James-Yu) for the VS Code LaTeX Workshop Extension
+* [tobiil](https://github.com/tobiil) for contribution

@@ -81,6 +81,10 @@ if [ -z "$dir" ]; then
   dir="."
 fi
 
+if [ -z "$clean" ]; then
+  clean=false
+fi
+
 cd $dir
 
 # Exit on error, unset variables and pipe fails

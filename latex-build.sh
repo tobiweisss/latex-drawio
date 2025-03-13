@@ -88,18 +88,39 @@ set -eou pipefail
 
 # Search for the drawio files in the current directory and all its subdirectories
 drawio_files=$(find ~+ -type f -name "*.drawio")
-# Convert the drawio files to pdf files 
+
+# Convert the drawio files to pdf files if they are newer or the pdf doesn't exist
+echo "##################################################"
+echo "Converting drawio files to pdf files"
+echo "##################################################"
+echo ""
+
 for drawio_file in $drawio_files
 do
-  xvfb-run -a drawio -x -f pdf -o $drawio_file.pdf --crop -t $drawio_file --no-sandbox --disable-gpu 2>&1 | grep -Fvf "/usr/share/latex-build/unwanted-logs.txt"
+  pdf_file="${drawio_file}.pdf"
+  filename=$(basename "$drawio_file" .drawio)
+
+  # Check if drawio file is newer than the pdf file or if the pdf does not exist
+  if [[ ! -f "$pdf_file" || "$drawio_file" -nt "$pdf_file" ]]; then
+    echo "Converting $filename.drawio"
+    xvfb-run -a drawio -x -f pdf -o "$pdf_file" --crop -t "$drawio_file" --no-sandbox --disable-gpu 2>&1 | grep -Fvf "/usr/share/latex-build/unwanted-logs.txt"
+  else
+    echo "Skipping: $filename.drawio (PDF is up-to-date)"
+  fi
 done
 
-# Build the latex files using latexmk and pdflatex
-latexmk -pdf -halt-on-error -interaction=nonstopmode -file-line-error
+echo ""
+echo "##################################################"
+echo "Building the latex files"
+echo "##################################################"
+echo ""
+
+#Build the latex files using latexmk and pdflatex
+latexmk -pdf -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
 
 if [ "$clean" = true ]; then
   # Remove the auxiliary files if exist
-  rm -f **/*.aux **/*.log **/*.out **/*.toc **/*.run.xml **/*.fls **/*.blg **/*.bbl **/*.fdb_latexmk **/*.synctex.gz **/*.bcf **/*.nav **/*.snm **/*.lol **/*.lof **/*.lot
+  rm -f **/*.aux **/*.log **/*.out **/*.toc **/*.run.xml **/*.fls **/*.blg **/*.bbl **/*.fdb_latexmk **/*.bcf **/*.nav **/*.snm **/*.lol **/*.lof **/*.lot
   # For some reason the glob pattern does not match the files in the root directory
-  rm -f *.aux *.log *.out *.toc *.run.xml *.fls *.blg *.bbl *.fdb_latexmk *.synctex.gz *.bcf *.nav *.snm *.lol *.lof *.lot
+  rm -f *.aux *.log *.out *.toc *.run.xml *.fls *.blg *.bbl *.fdb_latexmk *.bcf *.nav *.snm *.lol *.lof *.lot
 fi

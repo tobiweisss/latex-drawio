@@ -1,0 +1,148 @@
+{
+    "name": "LaTeX",
+    "image": "ghcr.io/tobiweisss/latex-drawio:latest",
+    // Use the next lines for development of the image
+    // "build":{
+    //     "dockerfile": "../../Dockerfile"
+    // },
+    "customizations": {
+        "vscode": {
+            "extensions": [        
+                "james-yu.latex-workshop",
+                "tecosaur.latex-utilities",
+                "yzhang.markdown-all-in-one",
+                "valentjn.vscode-ltex"
+            ],
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "latex-workshop.latex.recipe.default": "latex-build 🐱☕",
+                "latex-workshop.latex.tools": [
+                    {
+                        "name": "latexmk",
+                        "command": "latexmk",
+                        "args": [
+                            "-synctex=1",
+                            "-interaction=nonstopmode",
+                            "-file-line-error",
+                            "-pdf",
+                            "-outdir=%OUTDIR%",
+                            "%DOC%"
+                        ],
+                        "env": {}
+                    },
+                    {
+                        "name": "xelatex",
+                        "command": "xelatex",
+                        "args": [
+                            "-synctex=1",
+                            "-interaction=nonstopmode",
+                            "-file-line-error",
+                            "%DOC%"
+                        ],
+                        "env": {}
+                    },
+                    {
+                        "name": "pdflatex",
+                        "command": "pdflatex",
+                        "args": [
+                            "-synctex=1",
+                            "-interaction=nonstopmode",
+                            "-file-line-error",
+                            "%DOC%"
+                        ],
+                        "env": {}
+                    },
+                    {
+                        "name": "bibtex",
+                        "command": "bibtex",
+                        "args": [
+                            "%DOCFILE%"
+                        ],
+                        "env": {}
+                    },
+                    {
+                        "name": "biber",
+                        "command": "biber",
+                        "args": [
+                            "%DOCFILE%"
+                        ]
+                    },
+                    {
+                        "name": "latex-build",
+                        "command": "latex-build",
+                        "args": [
+                            "-d %DIR%"
+                        ]
+                    },
+                    {
+                        "name": "latex-build-clean",
+                        "command": "latex-build",
+                        "args": [
+                            "-c",
+                            "-d %DIR%"
+                        ]
+                    }
+                ],
+                "latex-workshop.latex.recipes": [
+                    {
+                        "name": "latex-build 🐱☕",
+                        "tools": [
+                            "latex-build"
+                        ]
+                    },
+                    {
+                        "name": "latex-build-clean 🐱☕",
+                        "tools": [
+                            "latex-build-clean"
+                        ]
+                    },
+                    {
+                        "name": "pdfLaTeX",
+                        "tools": [
+                            "pdflatex"
+                        ]
+                    },
+                    {
+                        "name": "latexmk 🔃",
+                        "tools": [
+                            "latexmk"
+                        ]
+                    },
+                    {
+                        "name": "xelatex",
+                        "tools": [
+                            "xelatex"
+                        ]
+                    },
+                    {
+                        "name": "pdflatex ➞ bibtex ➞ pdflatex`×2",
+                        "tools": [
+                            "pdflatex",
+                            "bibtex",
+                            "pdflatex",
+                            "pdflatex"
+                        ]
+                    },
+                    {
+                        "name": "xelatex ➞ bibtex ➞ xelatex`×2",
+                        "tools": [
+                            "xelatex",
+                            "bibtex",
+                            "xelatex",
+                            "xelatex"
+                        ]
+                    },
+                    {
+                        "name": "pdflatex ➞ biber ➞ pdflatex`×2",
+                        "tools": [
+                            "pdflatex",
+                            "biber",
+                            "pdflatex",
+                            "pdflatex"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

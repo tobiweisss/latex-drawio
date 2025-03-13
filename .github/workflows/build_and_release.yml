@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'version.txt'
 
 env:
   REGISTRY: ghcr.io

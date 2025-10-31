@@ -1,11 +1,11 @@
 {
     "name": "LaTeX",
     "image": "ghcr.io/tobiweisss/latex-drawio:latest",
-    // Use the next lines for development of the image
+    // // Use the next lines for development of the image
     // "build":{
     //     "dockerfile": "../../Dockerfile"
     // },
-    // Uncomment the next lines to mount your local fonts and texmf tree into the container
+    // // Uncomment the next lines to mount your local fonts and texmf tree into the container
     // "mounts": [
     //     // This way the local fonts and texmf tree are available in the container
     //     // This only works when the local folders exist and do not contain symlinks! Otherwise the linked files would not be found in the container.
@@ -25,7 +25,7 @@
             ],
             "settings": {
                 "terminal.integrated.shell.linux": "/bin/bash",
-                "latex-workshop.latex.recipe.default": "latex-build 🐱☕",
+                "latex-workshop.latex.recipe.default": "lastUsed",
                 "latex-workshop.latex.tools": [
                     {
                         "name": "latexmk",
@@ -125,6 +125,16 @@
                             "-c",
                             "-d %DIR%"
                         ]
+                    },
+                    {
+                        "name": "drawio-build",
+                        "command": "drawio-build",
+                        "args": []
+                    },
+                    {
+                        "name": "latex-clean",
+                        "command": "latex-clean",
+                        "args": []
                     }
                 ],
                 "latex-workshop.latex.recipes": [
@@ -141,27 +151,39 @@
                         ]
                     },
                     {
-                        "name": "latex-build-lualatex 😻☕",
+                        "name": "lualatex-build 😻☕",
                         "tools": [
                             "latex-build-lualatex"
                         ]
                     },
                     {
-                        "name": "latex-build-clean-lualatex 😻☕",
+                        "name": "lualatex-build-clean 😻☕",
                         "tools": [
                             "latex-build-clean-lualatex"
                         ]
                     },
                     {
-                        "name": "latex-build-xelatex 🙀☕",
+                        "name": "xelatex-build 🙀☕",
                         "tools": [
                             "latex-build-xelatex"
                         ]
                     },
                     {
-                        "name": "latex-build-clean-xelatex 🙀☕",
+                        "name": "xelatex-build-clean 🙀☕",
                         "tools": [
                             "latex-build-clean-xelatex"
+                        ]
+                    },
+                    {
+                        "name": "drawio-build 🖊️",
+                        "tools":[
+                            "drawio-build"
+                        ]
+                    },
+                    {
+                        "name": "latex-clean 🗑️",
+                        "tools":[
+                            "latex-clean"
                         ]
                     },
                     {

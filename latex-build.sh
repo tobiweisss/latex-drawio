@@ -131,16 +131,18 @@ echo "Building the latex files"
 echo "##################################################"
 echo ""
 
-#Build the latex files using latexmk and pdflatex
-if [ -z "$engine" ]; then
+# Build the latex files using latexmk and pdflatex
+# Use safe parameter expansion (${engine:-}) so referencing the variable
+# doesn't fail when 'set -u' (treat unset as error) is enabled.
+if [ -z "${engine:-}" ]; then
   engine="pdflatex"
 fi
 
-if [ "$engine" = "pdflatex" ]; then
+if [ "${engine:-}" = "pdflatex" ]; then
   latexmk -pdf -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
-elif [ "$engine" = "xelatex" ]; then
+elif [ "${engine:-}" = "xelatex" ]; then
   latexmk -xelatex -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
-elif [ "$engine" = "lualatex" ]; then
+elif [ "${engine:-}" = "lualatex" ]; then
   latexmk -lualatex -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
 else
   latexmk -pdf -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error

@@ -22,7 +22,7 @@ This setup allows you to build and edit your LaTeX projects on every machine run
 
 In the [examples/.devcontainer/devcontainer.json](examples/.devcontainer/devcontainer.json) file you can find an example how to bind your local directories into the container. This might be useful for templates in your host `~/texmf` directory or custom fonts in your hosts `~/.fonts`directory.
 >[!CAUTION]
-> If your host directories contain symlinks this will not work! Because the linked path does (probably) not exist inside the container
+> If your host directories contain symlinks this will not work, because the linked path does (probably) not exist inside the container!
 
 ## Thanks to
 * [rlespinasse](https://github.com/rlespinasse/docker-drawio-desktop-headless) dockerized version of drawio

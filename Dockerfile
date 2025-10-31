@@ -26,7 +26,9 @@ RUN apt-get install texlive-lang-english texlive-lang-german -y
 ##################################################################################################
 # Stage 3: Make latex-build script available
 COPY latex-build.sh /usr/bin/latex-build
-RUN chmod +x /usr/bin/latex-build
+COPY drawio-build.sh /usr/bin/drawio-build
+COPY latex-clean.sh /usr/bin/latex-clean
+RUN chmod +x /usr/bin/latex-build /usr/bin/drawio-build /usr/bin/latex-clean
 RUN mkdir /usr/share/latex-build/
 COPY unwanted-logs.txt /usr/share/latex-build/unwanted-logs.txt
 RUN echo "shopt -s globstar" >> /root/.bashrc

@@ -11,7 +11,8 @@
                 "james-yu.latex-workshop",
                 "tecosaur.latex-utilities",
                 "yzhang.markdown-all-in-one",
-                "valentjn.vscode-ltex"
+                "valentjn.vscode-ltex",
+                "hediet.vscode-drawio"
             ],
             "settings": {
                 "terminal.integrated.shell.linux": "/bin/bash",

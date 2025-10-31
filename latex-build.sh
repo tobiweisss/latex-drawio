@@ -6,6 +6,9 @@ usage(){
     echo "  -h, --help          Show this help message and exit"
     echo "  -d, --dir           Directory to search for the input files [*.tex, *.bib, *.drawio]. Default is the current directory"
     echo "  -c, --clean         Clean the auxiliary files after building the pdf"
+    echo "  -p, --pdf           Use latexmk with pdflatex to build the pdf (default)"
+    echo "  -x, --xelatex       Use latexmk with xelatex to build the pdf"
+    echo "  -l, --lualatex      Use latexmk with lualatex to build the pdf"
 }
 
 has_argument() {
@@ -37,6 +40,15 @@ handle_options() {
         dir=$(extract_argument $@)
 
         shift
+        ;;
+      -p | --pdf)
+        engine="pdflatex"
+        ;;
+      -x | --xelatex)
+        engine="xelatex"
+        ;;
+      -l | --lualatex)
+        engine="lualatex"
         ;;
       *)
         echo "Invalid option: $1" >&2
@@ -120,7 +132,19 @@ echo "##################################################"
 echo ""
 
 #Build the latex files using latexmk and pdflatex
-latexmk -pdf -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
+if [ -z "$engine" ]; then
+  engine="pdflatex"
+fi
+
+if [ "$engine" = "pdflatex" ]; then
+  latexmk -pdf -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
+elif [ "$engine" = "xelatex" ]; then
+  latexmk -xelatex -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
+elif [ "$engine" = "lualatex" ]; then
+  latexmk -lualatex -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
+else
+  latexmk -pdf -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
+fi
 
 if [ "$clean" = true ]; then
   # Remove auxiliary files if exist

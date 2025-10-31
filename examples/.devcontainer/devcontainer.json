@@ -7,7 +7,7 @@
     // },
     "customizations": {
         "vscode": {
-            "extensions": [        
+            "extensions": [
                 "james-yu.latex-workshop",
                 "tecosaur.latex-utilities",
                 "yzhang.markdown-all-in-one",
@@ -75,9 +75,43 @@
                         ]
                     },
                     {
+                        "name": "latex-build-lualatex",
+                        "command": "latex-build",
+                        "args": [
+                            "-l",
+                            "-d %DIR%"
+                        ]
+                    },
+                    {
+                        "name": "latex-build-xelatex",
+                        "command": "latex-build",
+                        "args": [
+                            "-x",
+                            "-d %DIR%"
+                        ]
+                    },
+                    {
                         "name": "latex-build-clean",
                         "command": "latex-build",
                         "args": [
+                            "-c",
+                            "-d %DIR%"
+                        ]
+                    },
+                    {
+                        "name": "latex-build-clean-lualatex",
+                        "command": "latex-build",
+                        "args": [
+                            "-l",
+                            "-c",
+                            "-d %DIR%"
+                        ]
+                    },
+                    {
+                        "name": "latex-build-clean-xelatex",
+                        "command": "latex-build",
+                        "args": [
+                            "-x",
                             "-c",
                             "-d %DIR%"
                         ]
@@ -94,6 +128,30 @@
                         "name": "latex-build-clean 🐱☕",
                         "tools": [
                             "latex-build-clean"
+                        ]
+                    },
+                    {
+                        "name": "latex-build-lualatex 😻☕",
+                        "tools": [
+                            "latex-build"
+                        ]
+                    },
+                    {
+                        "name": "latex-build-clean-lualatex 😻☕",
+                        "tools": [
+                            "latex-build-clean"
+                        ]
+                    },
+                    {
+                        "name": "latex-build-xelatex 🙀☕",
+                        "tools": [
+                            "latex-build-xelatex"
+                        ]
+                    },
+                    {
+                        "name": "latex-build-clean-xelatex 🙀☕",
+                        "tools": [
+                            "latex-build-clean-xelatex"
                         ]
                     },
                     {

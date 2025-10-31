@@ -5,6 +5,15 @@
     // "build":{
     //     "dockerfile": "../../Dockerfile"
     // },
+    // Uncomment the next lines to mount your local fonts and texmf tree into the container
+    // "mounts": [
+    //     // This way the local fonts and texmf tree are available in the container
+    //     // This only works when the local folders exist and do not contain symlinks! Otherwise the linked files would not be found in the container.
+    //     "source=${localEnv:HOME}/.fonts,target=/root/.fonts,type=bind,consistency=cached",
+    //     "source=${localEnv:HOME}/texmf,target=/root/texmf,type=bind,consistency=cached"
+    // ],
+    // // Update the font cache after creating the container
+    // "postStartCommand": "fc-cache -vf",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -134,13 +143,13 @@
                     {
                         "name": "latex-build-lualatex 😻☕",
                         "tools": [
-                            "latex-build"
+                            "latex-build-lualatex"
                         ]
                     },
                     {
                         "name": "latex-build-clean-lualatex 😻☕",
                         "tools": [
-                            "latex-build-clean"
+                            "latex-build-clean-lualatex"
                         ]
                     },
                     {

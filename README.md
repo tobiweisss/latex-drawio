@@ -12,10 +12,17 @@ Following Options are available: </br>
     -h, --help:     Show the help message </br>
     -d, --dir:      Specify the input directory to search for `*.tex` and `*.drawio` files. Default is the current directory</br>
     -c, --clean:    Clean up all auxiliary files </br>
+    -p, --pdf:      Use pdfLaTeX for building the `*.tex` files
+    -l, --lualatex: Use LuaLaTeX for building the `*.tex` files
+    -x, --xelatex:  Use XeLaTeX for building the `*.tex` files
 
 ## Intended use with LaTeX-Workshop in a VS Code devcontainer
-If you want to use this image in combination with the [Visual Studio Code LaTeX Workshop extension](https://github.com/James-Yu/LaTeX-Workshop) you can use the devcontainer provided in [examples/.devcontainer/](examples/.devcontainer/). This devcontainer is configured to build your LaTeX project using the provided script, when you click on `build` or press `Ctrl + Alt + B`. In the LaTex Workshop extension you can find two new recipes called `latex-build 🐱☕` to build the project using `latex-build` and a `latex-build-clean 🐱☕` recipe to build the project and clean up afterwards using `latex-build -c`.<br>
+If you want to use this image in combination with the [Visual Studio Code LaTeX Workshop extension](https://github.com/James-Yu/LaTeX-Workshop) you can use the devcontainer provided in [examples/.devcontainer/](examples/.devcontainer/). This devcontainer is configured to build your LaTeX project using the provided script, when you click on `build` or press `Ctrl + Alt + B`. In the LaTex Workshop extension you can find six new recipes called `latex-build 🐱☕`, `latex-build-lualatex 😻☕` and `latex-build-xelatex 🙀☕` to build the project using `latex-build` and `latex-build-clean 🐱☕`, `latex-build-clean-lualatex 😻☕` and `latex-build-clean-xelatex 🙀☕` recipe to build the project and clean up afterwards using `latex-build -c`.<br>
 This setup allows you to build and edit your LaTeX projects on every machine running Docker and VS Code.
+
+In the [examples/.devcontainer/devcontainer.json](examples/.devcontainer/devcontainer.json) file you can find an example how to bind your local directories into the container. This might be useful for templates in your host `~/texmf` directory or custom fonts in your hosts `~/.fonts`directory.
+>[!CAUTION]
+> If your host directories contain symlinks this will not work! Because the linked path does (probably) not exist inside the container
 
 ## Thanks to
 * [rlespinasse](https://github.com/rlespinasse/docker-drawio-desktop-headless) dockerized version of drawio

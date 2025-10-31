@@ -6,6 +6,9 @@ usage(){
     echo "  -h, --help          Show this help message and exit"
     echo "  -d, --dir           Directory to search for the input files [*.tex, *.bib, *.drawio]. Default is the current directory"
     echo "  -c, --clean         Clean the auxiliary files after building the pdf"
+    echo "  -p, --pdf           Use latexmk with pdflatex to build the pdf (default)"
+    echo "  -x, --xelatex       Use latexmk with xelatex to build the pdf"
+    echo "  -l, --lualatex      Use latexmk with lualatex to build the pdf"
 }
 
 has_argument() {
@@ -37,6 +40,15 @@ handle_options() {
         dir=$(extract_argument $@)
 
         shift
+        ;;
+      -p | --pdf)
+        engine="pdflatex"
+        ;;
+      -x | --xelatex)
+        engine="xelatex"
+        ;;
+      -l | --lualatex)
+        engine="lualatex"
         ;;
       *)
         echo "Invalid option: $1" >&2
@@ -90,28 +102,7 @@ cd $dir
 # Exit on error, unset variables and pipe fails
 set -eou pipefail
 
-# Search for the drawio files in the current directory and all its subdirectories
-drawio_files=$(find ~+ -type f -name "*.drawio")
-
-# Convert the drawio files to pdf files if they are newer or the pdf doesn't exist
-echo "##################################################"
-echo "Converting drawio files to pdf files"
-echo "##################################################"
-echo ""
-
-for drawio_file in $drawio_files
-do
-  pdf_file="${drawio_file}.pdf"
-  filename=$(basename "$drawio_file" .drawio)
-
-  # Check if drawio file is newer than the pdf file or if the pdf does not exist
-  if [[ ! -f "$pdf_file" || "$drawio_file" -nt "$pdf_file" ]]; then
-    echo "Converting $filename.drawio"
-    xvfb-run -a drawio -x -f pdf -o "$pdf_file" --crop -t "$drawio_file" --no-sandbox --disable-gpu 2>&1 | grep -Fvf "/usr/share/latex-build/unwanted-logs.txt"
-  else
-    echo "Skipping: $filename.drawio (PDF is up-to-date)"
-  fi
-done
+bash /usr/bin/drawio-build
 
 echo ""
 echo "##################################################"
@@ -119,11 +110,23 @@ echo "Building the latex files"
 echo "##################################################"
 echo ""
 
-#Build the latex files using latexmk and pdflatex
-latexmk -pdf -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
+# Build the latex files using latexmk and pdflatex
+# Use safe parameter expansion (${engine:-}) so referencing the variable
+# doesn't fail when 'set -u' (treat unset as error) is enabled.
+if [ -z "${engine:-}" ]; then
+  engine="pdflatex"
+fi
+
+if [ "${engine:-}" = "pdflatex" ]; then
+  latexmk -pdf -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
+elif [ "${engine:-}" = "xelatex" ]; then
+  latexmk -xelatex -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
+elif [ "${engine:-}" = "lualatex" ]; then
+  latexmk -lualatex -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
+else
+  latexmk -pdf -synctex=1 -halt-on-error -interaction=nonstopmode -file-line-error
+fi
 
 if [ "$clean" = true ]; then
-  # Remove auxiliary files if exist
-  rm -f **/*.aux **/*.log **/*.out **/*.toc **/*.run.xml **/*.fls **/*.blg **/*.bbl **/*.fdb_latexmk **/*.synctex.gz **/*.bcf **/*.nav **/*.snm **/*.lol **/*.lof **/*.lot **/*.mtc*
-  rm -f *.aux *.log *.out *.toc *.run.xml *.fls *.blg *.bbl *.fdb_latexmk *.synctex.gz *.bcf *.nav *.snm *.lol *.lof *.lot *.mtc*
+  bash /usr/bin/latex-clean
 fi

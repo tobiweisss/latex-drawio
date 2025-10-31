@@ -1,7 +1,7 @@
 # LaTeX-drawio-docker
 This repository contains a docker image which can be used for building LaTeX projects.
 The docker image contains a TeXLive-full installation (without docs and language packs, beside english and german).
-It also conatins a installation of drawio which can be used to build pdf files from `*.drawio` files.
+It also contains a installation of drawio which can be used to build pdf files from `*.drawio` files.
 
 ## Usage
 To pull the latest version of this image use `docker pull ghcr.io/tobiweisss/latex-drawio:latest`

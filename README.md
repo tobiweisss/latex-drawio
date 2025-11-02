@@ -9,19 +9,21 @@ To pull the latest version of this image use `docker pull ghcr.io/tobiweisss/lat
 To simplify the usage the container introduces the `latex-build` command to automatically build `<your-file>.drawio.pdf` from ever `<your-file>.drawio` in the specified directory. After that the script calls `latexmk -pdf` for building all the `*.tex` files.
 
 Following Options are available: </br>
-    -h, --help:     Show the help message </br>
-    -d, --dir:      Specify the input directory to search for `*.tex` and `*.drawio` files. Default is the current directory</br>
-    -c, --clean:    Clean up all auxiliary files </br>
-    -p, --pdf:      Use pdfLaTeX for building the `*.tex` files </br>
-    -l, --lualatex: Use LuaLaTeX for building the `*.tex` files </br>
-    -x, --xelatex:  Use XeLaTeX for building the `*.tex` files </br>
+| Short Option      |  Long Option      | Description            |
+|-------------|------------------------|------------------------|
+| -h | --help:    | Show the help message |
+| -d | --dir:     | Specify the input directory to search for `*.tex` and `*.drawio` files. Default is the current directory |
+| -c | --clean:   | Clean up all auxiliary files |
+| -p | --pdf:     | Use pdfLaTeX for building the `*.tex` files |
+| -x | --xelatex: | Use XeLaTeX for building the `*.tex` files |
+| -l | --lualatex:| Use LuaLaTeX for building the `*.tex` files |
 
 Beside the `latex-build` script, the container also provides the `drawio-build` script to only build the `*.drawio` files to `*.drawio.pdf` files and the `latex-clean` script to only clean up auxiliary files.
 
 ## Intended use with LaTeX-Workshop in a VS Code devcontainer
 If you want to use this image in combination with the [Visual Studio Code LaTeX Workshop extension](https://github.com/James-Yu/LaTeX-Workshop) you can use the devcontainer provided in [examples/.devcontainer/](examples/.devcontainer/). This devcontainer is configured to build your LaTeX project using the provided script, when you click on `build` or press `Ctrl + Alt + B`. In the LaTeX Workshop extension you can find eight new recipes called:
 </br>
-| recipe                    	| description                                                                     	| command                                                 	|
+| Recipe                    	| Description                                                                     	| Command                                                 	|
 |---------------------------	|---------------------------------------------------------------------------------	|---------------------------------------------------------	|
 | `latex-build 🐱☕`          	| Build all `*.tex` and `*.drawio` files using pdfLaTeX                           	| same as calling `latex-build` or `latex-build -p`       	|
 | `lualatex-build 😻☕`       	| Build all `*.tex` and `*.drawio` files using LuaLaTeX                           	| same as calling `latex-build -l`                        	|

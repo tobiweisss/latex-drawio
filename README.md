@@ -33,6 +33,7 @@ If you want to use this image in combination with the [Visual Studio Code LaTeX 
 | `xelatex-build-clean 🙀☕`  	| Build all `*.tex` and `*.drawio` files using XeLaTeX and clean auxiliary files  	| same as calling `latex-build -x -c`                     	|
 | `drawio-build 🖊️`          	 | Build all `*.drawio` files                                                      	 | same as calling `drawio-build`                          	 |
 | `latex-clean 🗑️`           	 | Only clean up all auxiliary files                                               	 | same as calling `latex-clean`                           	 |
+
 </br></br>
 
 In the [examples/.devcontainer/devcontainer.json](examples/.devcontainer/devcontainer.json) file you can find an example how to bind your local directories into the container. This might be useful for templates in your host `~/texmf` directory or custom fonts in your hosts `~/.fonts`directory.
@@ -43,4 +44,4 @@ In the [examples/.devcontainer/devcontainer.json](examples/.devcontainer/devcont
 ## Thanks to
 * [rlespinasse](https://github.com/rlespinasse/docker-drawio-desktop-headless) dockerized version of drawio
 * [James-Yu](https://github.com/James-Yu) for the VS Code LaTeX Workshop Extension
-* [tobiil](https://github.com/tobiil) for contribution
+* [lettnert](https://github.com/lettnert) for contribution

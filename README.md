@@ -9,14 +9,14 @@ To pull the latest version of this image use `docker pull ghcr.io/tobiweisss/lat
 To simplify the usage the container introduces the `latex-build` command to automatically build `<your-file>.drawio.pdf` from ever `<your-file>.drawio` in the specified directory. After that the script calls `latexmk -pdf` for building all the `*.tex` files.
 
 Following Options are available: </br>
-| Short Option      |  Long Option      | Description            |
-|-------------|------------------------|------------------------|
-| -h | --help:    | Show the help message |
-| -d | --dir:     | Specify the input directory to search for `*.tex` and `*.drawio` files. Default is the current directory |
-| -c | --clean:   | Clean up all auxiliary files |
-| -p | --pdf:     | Use pdfLaTeX for building the `*.tex` files |
-| -x | --xelatex: | Use XeLaTeX for building the `*.tex` files |
-| -l | --lualatex:| Use LuaLaTeX for building the `*.tex` files |
+| Short Option      |  Long Option           | Description                                                                                              |
+|-------------      |------------------------|------------------------                                                                                  |
+| -h                | --help                 | Show the help message                                                                                    |
+| -d                | --dir                  | Specify the input directory to search for `*.tex` and `*.drawio` files. Default is the current directory |
+| -c                | --clean                | Clean up all auxiliary files                                                                             |
+| -p                | --pdf                  | Use pdfLaTeX for building the `*.tex` files                                                              |
+| -x                | --xelatex              | Use XeLaTeX for building the `*.tex` files                                                               |
+| -l                | --lualatex             | Use LuaLaTeX for building the `*.tex` files                                                              |
 
 Beside the `latex-build` script, the container also provides the `drawio-build` script to only build the `*.drawio` files to `*.drawio.pdf` files and the `latex-clean` script to only clean up auxiliary files.
 

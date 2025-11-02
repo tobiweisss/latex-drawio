@@ -19,11 +19,22 @@ Following Options are available: </br>
 Beside the `latex-build` script, the container also provides the `drawio-build` script to only build the `*.drawio` files to `*.drawio.pdf` files and the `latex-clean` script to only clean up auxiliary files.
 
 ## Intended use with LaTeX-Workshop in a VS Code devcontainer
-If you want to use this image in combination with the [Visual Studio Code LaTeX Workshop extension](https://github.com/James-Yu/LaTeX-Workshop) you can use the devcontainer provided in [examples/.devcontainer/](examples/.devcontainer/). This devcontainer is configured to build your LaTeX project using the provided script, when you click on `build` or press `Ctrl + Alt + B`. In the LaTex Workshop extension you can find six new recipes called `latex-build 🐱☕`, `lualatex-build 😻☕` and `xelatex-build 🙀☕` to build the project using `latex-build` and `latex-build-clean 🐱☕`, `lualatex-build-clean 😻☕` and `xelatex-build-clean 🙀☕` recipe to build the project and clean up afterwards using `latex-build -c`.</br>
-Besides these recipes the devcontainer configuration also provides a `drawio-build 🖊️` recipe to only build the `*.drawio` files in your project folder and a `latex-clean 🗑️` recipe to only clean up the auxiliary files.</br>
-This setup allows you to build and edit your LaTeX projects on every machine running Docker and VS Code.
+If you want to use this image in combination with the [Visual Studio Code LaTeX Workshop extension](https://github.com/James-Yu/LaTeX-Workshop) you can use the devcontainer provided in [examples/.devcontainer/](examples/.devcontainer/). This devcontainer is configured to build your LaTeX project using the provided script, when you click on `build` or press `Ctrl + Alt + B`. In the LaTeX Workshop extension you can find eight new recipes called:
+</br>
+| recipe                    	| description                                                                     	| command                                                 	|
+|---------------------------	|---------------------------------------------------------------------------------	|---------------------------------------------------------	|
+| `latex-build 🐱☕`          	| Build all `*.tex` and `*.drawio` files using pdfLaTeX                           	| same as calling `latex-build` or `latex-build -p`       	|
+| `lualatex-build 😻☕`       	| Build all `*.tex` and `*.drawio` files using LuaLaTeX                           	| same as calling `latex-build -l`                        	|
+| `xelatex-build 🙀☕`        	| Build all `*.tex` and `*.drawio` files using XeLaTeX                            	| same as calling `latex-build -x`                        	|
+| `latex-build-clean 🐱☕`    	| Build all `*.tex` and `*.drawio` files using pdfLaTeX and clean auxiliary files 	| same as calling `latex-build -c` or `latex-build -p -c` 	|
+| `lualatex-build-clean 😻☕` 	| Build all `*.tex` and `*.drawio` files using LuaLaTeX and clean auxiliary files 	| same as calling `latex-build -l -c`                     	|
+| `xelatex-build-clean 🙀☕`  	| Build all `*.tex` and `*.drawio` files using XeLaTeX and clean auxiliary files  	| same as calling `latex-build -x -c`                     	|
+| `drawio-build 🖊️`          	 | Build all `*.drawio` files                                                      	 | same as calling `drawio-build`                          	 |
+| `latex-clean 🗑️`           	 | Only clean up all auxiliary files                                               	 | same as calling `latex-clean`                           	 |
+</br></br>
 
 In the [examples/.devcontainer/devcontainer.json](examples/.devcontainer/devcontainer.json) file you can find an example how to bind your local directories into the container. This might be useful for templates in your host `~/texmf` directory or custom fonts in your hosts `~/.fonts`directory.
+
 >[!CAUTION]
 > If your host directories contain symlinks this will not work, because the linked path does (probably) not exist inside the container!
 

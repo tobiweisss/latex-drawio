@@ -31,4 +31,8 @@ COPY latex-clean.sh /usr/bin/latex-clean
 RUN chmod +x /usr/bin/latex-build /usr/bin/drawio-build /usr/bin/latex-clean
 RUN mkdir /usr/share/latex-build/
 COPY unwanted-logs.txt /usr/share/latex-build/unwanted-logs.txt
-RUN echo "shopt -s globstar" >> /root/.bashrc
+
+##################################################################################################
+# Stage 4: Add non root user for building latex documents (ubuntu user is used)
+RUN echo "shopt -s globstar" >> /home/ubuntu/.bashrc
+USER ubuntu

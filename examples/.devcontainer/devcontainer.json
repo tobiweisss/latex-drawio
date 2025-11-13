@@ -1,6 +1,7 @@
 {
     "name": "LaTeX",
     "image": "ghcr.io/tobiweisss/latex-drawio:latest",
+    "remoteUser": "ubuntu",
     // // Use the next lines for development of the image
     // "build":{
     //     "dockerfile": "../../Dockerfile"
@@ -9,8 +10,8 @@
     // "mounts": [
     //     // This way the local fonts and texmf tree are available in the container
     //     // This only works when the local folders exist and do not contain symlinks! Otherwise the linked files would not be found in the container.
-    //     "source=${localEnv:HOME}/.fonts,target=/root/.fonts,type=bind,consistency=cached",
-    //     "source=${localEnv:HOME}/texmf,target=/root/texmf,type=bind,consistency=cached"
+    //     "source=${localEnv:HOME}/.fonts,target=/home/ubuntu/.fonts,type=bind,consistency=cached",
+    //     "source=${localEnv:HOME}/texmf,target=/home/ubuntu/texmf,type=bind,consistency=cached"
     // ],
     // // Update the font cache after creating the container
     // "postStartCommand": "fc-cache -vf",

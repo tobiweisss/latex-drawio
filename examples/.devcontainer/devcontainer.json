@@ -232,7 +232,8 @@
                             "pdflatex"
                         ]
                     }
-                ]
+                ],
+                "latex-workshop.formatting.latex": "latexindent"
             }
         }
     }
